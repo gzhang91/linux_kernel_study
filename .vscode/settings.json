@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "module.h": "c",
+        "init.h": "c",
+        "mm_types.h": "c",
+        "mm.h": "c",
+        "mm_types_task.h": "c",
+        "percpu.h": "c",
+        "elf.h": "c",
+        "cache.h": "c",
+        "stat.h": "c"
+    }
+}
