@@ -5,6 +5,32 @@
 #include <linux/sched.h>
 #include <linux/export.h>
 
+/*
+[66459.670771] vaddr to paddr module is running ...
+[66459.670772] cr0 = 0x80050033, cr3 = 0x7532000
+[66459.670772] PGDIR_SHIFT = 39
+[66459.670772] P4D_SHIFT = 39
+[66459.670773] PUD_SHIFT = 30
+[66459.670773] PMD_SHIFT = 21
+[66459.670773] PAGE_SHIFT = 12
+[66459.670774] PTRS_PER_PGD = 512
+[66459.670774] PTRS_PER_P4D = 1
+[66459.670774] PTRS_PER_PUD = 512
+[66459.670774] PTRS_PER_PMD = 512
+[66459.670791] PTRS_PER_PTE = 512
+[66459.670791] PAGE_MASK = 0xfffffffffffff000
+
+[66459.670792] get_page_vaddr = 0xffff934e78864000
+[66459.670793] pgd_val = 0x24a01067, pgd_index = 294
+[66459.670793] p4d_val = 0x24a01067, p4d_index = 0
+[66459.670793] pud_val = 0x24a02067, pud_index = 313
+[66459.670794] pmd_val = 0x353f6063, pmd_index = 452
+[66459.670794] pte_val = 0x8000000038864163, pte_index = 100
+[66459.670795] page_addr = 0x8000000038864000, page_offset = 0x0
+[66459.670795] vaddr = 0xffff934e78864000, paddr = 0x8000000038864000
+[66545.840995] vaddr to paddr module is leaving ...
+*/
+
 static unsigned long cr0, cr3;
 
 static unsigned long vaddr = 0;
@@ -70,7 +96,7 @@ static unsigned long vaddr2paddr(unsigned long vaddr)
 	}
 
 	pte = pte_offset_kernel(pmd, vaddr);
-	printk("pte_val = 0x%lx, pte_index = %lu\n", pte_val(*pmd), pte_index(vaddr));
+	printk("pte_val = 0x%lx, pte_index = %lu\n", pte_val(*pte), pte_index(vaddr));
 	if (pte_none(*pte)) {
 		printk("not mapped in pte\n");
 		return -1;
